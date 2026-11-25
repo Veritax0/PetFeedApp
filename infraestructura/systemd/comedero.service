@@ -1,0 +1,15 @@
+[Unit]
+Description=Backend del comedero de mascotas
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+User=pi
+WorkingDirectory=/home/pi/backendComedero
+EnvironmentFile=/home/pi/backendComedero/.env
+ExecStart=/home/pi/backendComedero/.venv/bin/uvicorn comedero.api:app --host 0.0.0.0 --port 8000 --workers 1
+Restart=always
+RestartSec=5
+
+[Install]
+WantedBy=multi-user.target
